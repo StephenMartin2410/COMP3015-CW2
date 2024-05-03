@@ -16,6 +16,7 @@ private:
     void setMatrices();
     std::unique_ptr<ObjMesh> mesh;
     void compile();
+    GLuint buildingTexture;
 
 public:
     SceneBasic_Uniform();

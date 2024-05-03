@@ -11,9 +11,12 @@ using std::cerr;
 using std::endl;
 #include <glm/gtc/matrix_transform.hpp>
 #include "helper/glutils.h"
+#include "helper/texture.h"
 
 using glm::vec3;
 using glm::mat4;
+GLuint buildingTexture;
+
 SceneBasic_Uniform::SceneBasic_Uniform() : plane(1.0f, 1.0f,100,100) {
 	mesh = ObjMesh::load("media/building.obj", true);
 }
@@ -26,7 +29,12 @@ void SceneBasic_Uniform::initScene()
 	model = mat4(1.0f);
 	view = glm::lookAt(vec3(0.0f, 0.0f, 2.0f), vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
 	projection = mat4(1.0f);
-	
+	prog.use();
+
+	buildingTexture = Texture::loadTexture("media/brick1.jpg");
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, buildingTexture);
+	prog.setUniform("text", 0);
 
 
 	float x, z;

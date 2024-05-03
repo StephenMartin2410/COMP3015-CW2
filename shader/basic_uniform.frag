@@ -2,7 +2,12 @@
 
 in vec3 Position;
 in vec3 Normal;
+in vec2 texCord;
 layout (location = 0) out vec4 FragColor;
+
+uniform sampler2D text;
+
+
 uniform struct LightInfo{
     vec4 Position;
     vec3 La;
@@ -18,7 +23,8 @@ uniform struct MaterialInfo{
 
 vec3 phongModel(int light, vec3 position, vec3 n){
 
-    vec3 ambient=lights[light].La*Material.Ka;
+    vec4 buildingTextureColour=texture(text, texCord);
+    vec3 ambient=lights[light].La*Material.Ka*buildingTextureColour.rgb;
     vec3 s=normalize(vec3(lights[light].Position.xyz)-position);
     float sDotN=max(dot(s,n),0.0);
     vec3 diffuse=Material.Kd*sDotN;
@@ -28,7 +34,7 @@ vec3 phongModel(int light, vec3 position, vec3 n){
         vec3 r = reflect(-s,n);
         spec = Material.Ks*pow(max(dot(r,v),0.0),Material.Shininess);
     }
-    return ambient+(diffuse+spec)*lights[light].L;
+    return ambient+(diffuse+spec)*lights[light].L*buildingTextureColour.rgb;
 
 }
 
