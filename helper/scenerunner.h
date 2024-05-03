@@ -119,8 +119,39 @@ private:
     void mainLoop(GLFWwindow * window, Scene & scene) {
         while( ! glfwWindowShouldClose(window) && !glfwGetKey(window, GLFW_KEY_ESCAPE) ) {
             GLUtils::checkForOpenGLError(__FILE__,__LINE__);
-			
+            
+            bool leftKey = false;
+            bool rightKey = false;
+            bool upKey = false;
+            bool downKey = false;
+
+            bool forwardKey = false;
+            bool backwardKey = false;
+
+            if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS) {
+                leftKey = true;
+            }
+            if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS) {
+                rightKey = true;
+            }
+            if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) {
+                upKey = true;
+            }
+            if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) {
+                downKey = true;
+            }
+            
+            if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
+                forwardKey = true;
+            }
+            if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
+                backwardKey = true;
+            }
+
             scene.update(float(glfwGetTime()));
+            scene.inputRotate(leftKey, rightKey, upKey, downKey);
+            scene.inputMovement(forwardKey, backwardKey);
+            
             scene.render();
             glfwSwapBuffers(window);
             glfwPollEvents();

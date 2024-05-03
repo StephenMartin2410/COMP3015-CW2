@@ -18,9 +18,13 @@ private:
     void compile();
     GLuint buildingTexture;
 
+    float tPrev;
+
 public:
     SceneBasic_Uniform();
 
+    void inputRotate(bool, bool, bool, bool);
+    void inputMovement(bool, bool);
     void initScene();
     void update( float t );
     void render();

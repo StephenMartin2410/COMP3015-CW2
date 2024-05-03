@@ -17,6 +17,17 @@ using glm::vec3;
 using glm::mat4;
 GLuint buildingTexture;
 
+vec3 cameraPosition = vec3(0.0f, 0.0f, 5.0f);
+vec3 cameraFront = vec3(0.0f, 0.0f, 0.0f);
+vec3 cameraUp = vec3(0.0f, 1.0f, 0.0f);
+
+float cameraYaw = -90.0f;
+float cameraPitch = 0.0f;
+float cameraLastXPos = 800.0f / 2.0f;
+float cameraLastYPos = 600.0f / 2.0f;
+
+float deltaT = 0.0f;
+
 SceneBasic_Uniform::SceneBasic_Uniform() : plane(1.0f, 1.0f,100,100) {
 	mesh = ObjMesh::load("media/building.obj", true);
 }
@@ -73,13 +84,19 @@ void SceneBasic_Uniform::compile()
 
 void SceneBasic_Uniform::update( float t )
 {
-	view = glm::rotate(view, glm::radians(-0.1f), vec3(0.0f, 1.0f, 0.0f));
-
+	deltaT = t - tPrev;
+	if (tPrev == 0.0f) {
+		deltaT = 0.0f;
+	}
+	tPrev = t;
 }
 
 void SceneBasic_Uniform::render()
 {
+	glClearColor(0.1f, 0.1f, 0.1f, 0.1f);
 	prog.use();
+	view = glm::lookAt(cameraPosition, cameraPosition + cameraFront, cameraUp);
+
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	model = mat4(1.0f);
 	prog.setUniform("Material.Kd", 0.2f, 0.55f, 0.9f);
@@ -105,4 +122,40 @@ void SceneBasic_Uniform::resize(int w, int h)
     width = w;
     height = h;
 	projection = glm::perspective(glm::radians(70.0f), (float)w / h, 0.3f, 100.0f);
+}
+
+void SceneBasic_Uniform::inputRotate(bool left, bool right, bool up, bool down) {
+
+	float offset = 0.6f;
+
+	if (left) {
+		cameraYaw -= offset;
+	}
+	if (right) {
+		cameraYaw += offset;
+	}
+	if (up) {
+		cameraPitch += offset;
+	}
+	if (down) {
+		cameraPitch -= offset;
+	}
+
+	vec3 direction;
+	direction.x = cos(glm::radians(cameraYaw)) * cos(glm::radians(cameraPitch));
+	direction.y = sin(glm::radians(cameraPitch));
+	direction.z = (sin(glm::radians(cameraYaw)) * cos(glm::radians(cameraPitch)));
+	cameraFront = normalize(direction);
+
+}
+
+void SceneBasic_Uniform::inputMovement(bool forward, bool backward) {
+	float moveSpeed = deltaT * 0.4f;
+
+	if (forward) {
+		cameraPosition += moveSpeed * cameraFront;
+	}
+	if (backward) {
+		cameraPosition -= moveSpeed * cameraFront;
+	}
 }
