@@ -1,4 +1,4 @@
-https://github.com/StephenMartin2410/COMP3015_CW1
+https://github.com/StephenMartin2410/COMP3015-CW2.git
 
 https://youtu.be/CwfYPjhoFRc
 # COMP3015 Coursework 1
