@@ -25,4 +25,4 @@ This file is used to translate the data given to it as locations in the virtual 
 - basic_uniform.frag
 This file is used to control and store the functions and datatypes needed to process and create the lighting effects for the program, this file also handles the colour output of the program, more specifically in this case, the phong lighting model is handled in this file, as well as the structs needed to hold data for lighting and material property calculations.
 
-All of these files and the given helper files in the labs are used to create the prototype for my CW1 demo.
+All of these files and the given helper files in the labs are used to create the prototype for my CW2 demo.
