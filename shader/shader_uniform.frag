@@ -6,7 +6,7 @@ in vec2 TexCoords;
 
 uniform sampler2D hdrBuffer;
 bool hdr = true;
-float exposure = 2.2;
+float exposure = 5;
 
 void main()
 {             
