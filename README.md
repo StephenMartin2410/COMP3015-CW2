@@ -6,23 +6,30 @@ Youtube Link -
 ## Visual Studio Community 2022 Version 17.8.0
 ## Windows 11 Pro Version 23H2 OS build 22631.3296
 
-When observing this repository or project folder, there are 4 files that matter the most in regards to the workload created by me.
-- scenebasic_uniform.cpp
-This is where most of the functions for the program are run, such as:
-  - initScene, which is used to set the uniform for the multiple lights in the scene.
-  - compile, which is used to compile the shaders of the program.
-  - update, which is used to run checks or repeated tasks on the program, like rotating an object.
-  - render, which is used to set material properties and render and control where the model is rendered.
-  - setMatricies, which is used to set the uniforms and matricies for the modelview
-  - and resize, which is used to define the window in which the program is run.
- 
-- scenebasic_uniform.h
-This is where most of the functions and public or private variables from scenebasic_uniform.cpp are initilized.
+#How does it work?
+In this program the user can use keyboard controls to control the position of the camera.
+- W and S move the camera forward and backwards.
+- The arrow keys move the camera angle around.
 
-- basic_uniform.vert
-This file is used to translate the data given to it as locations in the virtual plane by performing calculations on the data using the GPU.
+##  Features of the Application -
 
-- basic_uniform.frag
-This file is used to control and store the functions and datatypes needed to process and create the lighting effects for the program, this file also handles the colour output of the program, more specifically in this case, the phong lighting model is handled in this file, as well as the structs needed to hold data for lighting and material property calculations.
+- HDR with tone mapping
+This feature is used to allow brightness and colour values shown in a seen to go over the default maximum allowed value of 1.0. The HDR works by rendering the inital framebuffer with a colour buffer which can exceed 1.0. Then the colour buffer of the framebuffer is rendered to a screen sized quad. The program then uses tone mapping to ensure that when transforming the quad back into an outputtable buffer. Reinhard tone mapping is used to divide all of the HDR values into standard values. Tone mapping is also used to set the exposure of the scene so that the exposure is variable and can change how the HDR interacts with the detail of the scene.
+![alt text](image-1.png)
+![alt text](image-2.png)
+
+- Noise
+  - Disintegration 
+  This form of noise is used to remove parts of the disintegration plane in the scene. The rendered noise is used to discard the parts of noise that are generated on the plane.
+  - Paint Splatter 
+  This form of noise is used to paint parts of the paint splatter plane that have noise. 
+  - Cloud effect
+This feature works by mixing the colours white and blue with a noise texture to make a plane look like a set of clouds.
+![alt text](image.png)
+
+- Keyboard movement 
+The W and S keys are used in the scene to move forwards and backwards and then the arrow keys can be used to transform the angle of the camera.
+![alt text](image-3.png)
+![alt text](image-4.png)
 
 All of these files and the given helper files in the labs are used to create the prototype for my CW2 demo.
