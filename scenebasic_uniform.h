@@ -11,7 +11,7 @@
 class SceneBasic_Uniform : public Scene
 {
 private:
-    GLSLProgram prog;
+    GLSLProgram prog, shaderProg, noiseProg;
     Plane plane;
     void setMatrices();
     std::unique_ptr<ObjMesh> mesh;
