@@ -76,7 +76,7 @@ void SceneBasic_Uniform::initScene()
 
 
 	glGenFramebuffers(1, &hdrFBO);
-	// create floating point color buffer
+	// create floating point colour buffer
 	glGenTextures(1, &colorBuffer);
 	glBindTexture(GL_TEXTURE_2D, colorBuffer);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, width, height, 0, GL_RGBA, GL_FLOAT, NULL);
@@ -207,7 +207,7 @@ void SceneBasic_Uniform::render()
 
 	plane.render();
 
-	//s
+	//cloud
 	noiseProg.setUniform("renderType", 2);
 	noiseProg.setUniform("NoiseTex", 0);
 	glActiveTexture(GL_TEXTURE0);
