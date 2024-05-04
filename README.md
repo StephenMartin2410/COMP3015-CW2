@@ -36,7 +36,7 @@ The W and S keys are used in the scene to move forwards and backwards and then t
 ![alt text](image-4.png)
 
 ## Implementation - 
-- Scenebasic_uniform.cpp
+- Scenebasic_uniform.cpp - 
   This is the main hangout for all of the code for the program. 
 
   The first function is initScene, which is used to load in the texture for the model, load the position of the multiple lights from CW1, creating the colour buffer for the HDR implementation as well as attaching the colour buffer to the framebuffer of the program. 
@@ -49,24 +49,24 @@ The W and S keys are used in the scene to move forwards and backwards and then t
 
   The last two functions, inputRotate and input Movement, are used to take the input from scenerunner.h and use the functions to move the camera position and angle as the user presses W, S and the arrow keys.
 
-- basic_uniform_vert
+- basic_uniform_vert - 
   This is the standard vertex shader for the program.
 
-- basic_uniform.frag
+- basic_uniform.frag - 
   This is the standard fragment shader for the program. This is used to set the lighting information and the material information.
 
   The function used in this fragment shader is the phongModel function, which is used to set the specification of the lighting and set the specular lighting from CW1.
 
-- shader_uniform.vert
+- shader_uniform.vert - 
   This is the vertex shader for the HDR functionality of the program. 
 
-- shader_uniform.frag 
+- shader_uniform.frag -
   This is the fragment shader used for the HDR parts of the program. This file uses the value of exposure, gamma and the hdr buffer to give the scene the correct colour values to be able to display HDR. 
 
-- noise_uniform.vert
+- noise_uniform.vert - 
 This is the vertex shader for the noise functionality of the program.
 
-- noise_uniform.frag
+- noise_uniform.frag - 
   This is the fragment shader for the noise functionality of the program.
 
   The first function is phongModel, which is meant to be able to allow the planes outputted with the shader to show specular light but it doesn't seem to do much.
